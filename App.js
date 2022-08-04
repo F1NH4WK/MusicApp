@@ -7,6 +7,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';  
 
+
+// LOCAL IMPORTS
+import DisplayMusic from './components/displayMusic';
+
 export default function App() {
   return (
     <View style={styles.container}>
@@ -41,14 +45,10 @@ export default function App() {
         <View style = {styles.navBarIcon}>
           <MaterialIcons name="my-library-music" size={25} color="white" style = {{alignSelf: 'center', marginBottom: 3}}/>
           <Text style = {{color: 'white', fontSize: 13}}>My library</Text>
-
-
         </View>
-          
-
-
         </View>
       
+      <DisplayMusic/>
     </View>
   );
 }
