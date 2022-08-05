@@ -11,11 +11,9 @@ export default function DisplayMusic(props){
             <Image source={{uri: 'https://picsum.photos/200/300'}} style = {
                 {width: 40, height: 40, borderRadius: 10}}/>
 
-            <View style = {{
-            flexDirection: 'column',
-            maxWidth: '55%'}}>
-
-                <Text style = {{color: 'white', fontWeight: 'bold', fontSize: 14}}>Woman 	• Doja Cat</Text>
+            <View style = {{flexDirection: 'column', width: '30%', justifyContent: 'flex-start'}}>
+                <Text style = {{color: 'white', fontWeight: 'bold', fontSize: 14}}>The Real Slim Shaddy</Text>
+                <Text style = {{color: 'gray', fontSize: 12}}>Doja Cat</Text>
             </View>
 
             <View style = {{

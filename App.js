@@ -1,19 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, FlatList, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, FlatList, ScrollView, Pressable } from 'react-native';
 import { useState } from 'react';
 
 // ICONS
-import { Ionicons } from '@expo/vector-icons'; 
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';  
+import { 
+  MaterialCommunityIcons, MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 // LOCAL IMPORTS
 import DisplayMusic from './components/displayMusic';
 
-function RenderRecent(){
+function RenderRecent(props){
   return(
     <View style = {styles.recentMusicsStyle}>
-
+      <Image source = {{uri: 'https://picsum.photos/200/300'}} style = {
+                  {width: 130, height: 130, borderRadius: 10, marginBottom: 10}} />
+      <Text style = {{fontWeight: 'bold'}}>{props.nome}</Text>
+      <Text style = {{color: 'gray'}}>Single • Enygma</Text>
     </View>
   )
 }
@@ -21,10 +23,12 @@ function RenderRecent(){
 
 export default function App() {
 
-  const test = [1,2,3]
+  const test = ["nome1", "nome2", "nome3", "nome4", 'nom5', 'nom6']
+
   return (
     <View style={styles.container}>
         <StatusBar style="auto" />
+        <ScrollView fadingEdgeLength={5} showsVerticalScrollIndicator = {false}>
 
         {/* THE TOP VIEW */}
         <View style = {styles.introGrouper}>
@@ -39,41 +43,13 @@ export default function App() {
         </View>
 
         <View style = {styles.topSongs}>
+          {test.map((i) => 
           <View style = {styles.topSongsStyle}>
             <Image source = {{uri: 'https://picsum.photos/200/300'}} style = {
                   {width: 50, height: 50, borderRadius: 10}} />
-            <Text>Playlist 1</Text>
+            <Text>{i}</Text>
           </View>
-
-          <View style = {styles.topSongsStyle}>
-            <Image source = {{uri: 'https://picsum.photos/200/300'}} style = {
-                  {width: 50, height: 50, borderRadius: 10}} />
-            <Text>Playlist 1</Text>
-          </View>
-
-          <View style = {styles.topSongsStyle}>
-            <Image source = {{uri: 'https://picsum.photos/200/300'}} style = {
-                  {width: 50, height: 50, borderRadius: 10}} />
-            <Text>Playlist 1</Text>
-          </View>
-          
-          <View style = {styles.topSongsStyle}>
-            <Image source = {{uri: 'https://picsum.photos/200/300'}} style = {
-                  {width: 50, height: 50, borderRadius: 10}} />
-            <Text>Playlist 1</Text>
-          </View>
-
-          <View style = {styles.topSongsStyle}>
-            <Image source = {{uri: 'https://picsum.photos/200/300'}} style = {
-                  {width: 50, height: 50, borderRadius: 10}} />
-            <Text>Playlist 1</Text>
-          </View>
-
-          <View style = {styles.topSongsStyle}>
-            <Image source = {{uri: 'https://picsum.photos/200/300'}} style = {
-                  {width: 50, height: 50, borderRadius: 10}} />
-            <Text>Playlist 1</Text>
-          </View>
+          )}
         </View> 
 
         {/* LAST VIEWED */}
@@ -82,32 +58,40 @@ export default function App() {
         <View style = {styles.recentMusicsView}>
           <FlatList 
           data={test}
-          renderItem={(item) => <RenderRecent/>}/>
+          renderItem={(item) => <RenderRecent nome = {item.item}/>}
+          horizontal = {true}
+          showsHorizontalScrollIndicator = {false}/>
         </View>
 
         <Text style = {{alignSelf: 'flex-start', fontWeight: '700', fontSize: 24 }}>Your top mixes</Text>
-
-
+        <View style = {styles.recentMusicsView}>
+          <FlatList 
+          data={test}
+          renderItem={(item) => <RenderRecent nome = {item.item}/>}
+          horizontal = {true}
+          showsHorizontalScrollIndicator = {false}/>
+        </View>
+          
+        </ScrollView>
         {/* HERE'S THE NAVBAR, PRETTY SIMPLE, BUT I LOVED IT :) */}
+        
 
         <View style = {styles.navBar}>
           <View style = {styles.navBarIcon}>
-            <Ionicons name="home-outline" size={22} color="white" style = {{alignSelf: 'center', marginBottom: 3}}/>
+            <Ionicons name="home-outline" size={27} color="white" style = {{alignSelf: 'center', marginBottom: 3}}/>
             <Text style = {{color: 'white', fontSize: 12}}>Home</Text>
           </View>
 
           <View style = {styles.navBarIcon}>
-            <Ionicons name="search-outline" size={22} color="white" style = {{alignSelf: 'center', marginBottom: 3}}/>
+            <Ionicons name="search-outline" size={27} color="white" style = {{alignSelf: 'center', marginBottom: 3}}/>
             <Text style = {{color: 'white', fontSize: 12 }}>Search</Text>
           </View>
 
           <View style = {styles.navBarIcon}>
-            <MaterialIcons name="my-library-music" size={22} color="white" style = {{alignSelf: 'center', marginBottom: 3}}/>
+            <MaterialIcons name="my-library-music" size={27} color="white" style = {{alignSelf: 'center', marginBottom: 3}}/>
             <Text style = {{color: 'white', fontSize: 12}}>My library</Text>
           </View>
-        </View>
-       
-      
+        </View>      
       <DisplayMusic style = {styles}/>
     </View>
   );
@@ -138,11 +122,13 @@ const styles = StyleSheet.create({
 
   navBar: {
     position: 'absolute',
-    bottom: 15,
+    bottom: 0,
+    paddingVertical: 15,
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'space-evenly'
-
+    justifyContent: 'space-evenly',
+    backgroundColor: '#121212',
+    opacity: 0.95
   },
 
   navBarIcon: {
@@ -160,18 +146,17 @@ const styles = StyleSheet.create({
     bottom: 70,
     position: 'absolute',
     backgroundColor: '#fefcfb',
-    borderRadius: 10
+    borderRadius: 10,
     },
 
     topSongs: {
-      // borderColor: 'red',
-      // borderWidth: 2,
+      borderColor: 'red',
+      borderWidth: 2,
       height: '30%',
       width: '100%',
-      maxWidth: '105%',
       flexWrap: 'wrap',
       alignItems: 'center',
-      justifyContent: 'space-evenly',
+      justifyContent: 'space-around',
       marginBottom: 5,
     },
 
@@ -186,20 +171,20 @@ const styles = StyleSheet.create({
     },
 
     recentMusicsView: {
-      borderColor: 'red',
-      borderWidth: 2,
+      // borderColor: 'red',
+      // borderWidth: 2,
       height: '30%',
       width: '100%',
       flexDirection: 'row',
       marginBottom: 18,
       padding: 7,
+      alignItems: 'center'
     },
 
     recentMusicsStyle: {
-      borderColor: 'blue',
-      borderWidth: 2,
-      height: '100%',
-      width: '30%'
+      // borderColor: 'blue',
+      // borderWidth: 2,
+      marginRight: 25
 
     }
   }
