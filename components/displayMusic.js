@@ -4,16 +4,14 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function DisplayMusic(props){
 
-    const styles = props.style
-
     return(
-        <View style = {styles.displayMusicGrouper}>
-            <Image source={{uri: 'https://picsum.photos/200/300'}} style = {
-                {width: 40, height: 40, borderRadius: 10}}/>
+        <View style = {props.style}>
+            <Image source={{uri: 'https://picsum.photos/200/300'}} 
+            style = {{ width: 40, height: 40, borderRadius: 10 }}/>
 
             <View style = {{flexDirection: 'column', width: '30%', justifyContent: 'flex-start'}}>
-                <Text style = {{color: 'white', fontWeight: 'bold', fontSize: 14}}>The Real Slim Shaddy</Text>
-                <Text style = {{color: 'gray', fontSize: 12}}>Doja Cat</Text>
+                <Text style = {{color: 'white', fontWeight: 'bold', fontSize: 15}}>{props.musica}</Text>
+                <Text style = {{color: 'gray', fontSize: 13}}>{props.singer}</Text>
             </View>
 
             <View style = {{
