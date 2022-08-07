@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Image } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
@@ -20,7 +20,11 @@ export default function DisplayMusic(props){
             width: '40%'}}>
                 <MaterialCommunityIcons name="devices" size={24} color="white" />
                 <Ionicons name="md-heart-outline" size={24} color="white" />
-                <Ionicons name="play" size={24} color="white" />
+                {
+                <Pressable onPress={async () => await props.stopPlaying()}>
+                    <Ionicons name="pause" size={24} color="black" />
+                </Pressable>
+                }
             </View>
         </View>
     )

@@ -15,38 +15,45 @@ import MusicView from './components/musicView';
 
 export default function App() {
 
-  const [musica, setMusica] = useState('')
+  const [musica, setMusica] = useState()
 
   const [musics, setMusics] = useState([{
-    musicName: 'Woman',
-    singer: 'Doja Cat',
+    musicName: 'Dirmouth',
+    singer: 'Hollow Knight',
     playing: false,
-    file: ''
+    file: require('./music/Dirtmouth.mp3')
   },
   {
-    musicName: 'The Real Slim Shaddy',
-    singer: 'Eminem',
+    musicName: 'Hornet',
+    singer: 'Hollow Knight',
     playing: false,
-    file: ''
+    file: require('./music/Hornet.mp3')
   },
 
   {
-    musicName: "Boys don't cry",
-    singer: "Annita",
+    musicName: "Mantis Lorids",
+    singer: "Hollow Knight",
     playing: false,
-    file: '',
+    file: require('./music/MantisLordis.mp3'),
   }
     ])
 
   const test = ["limitless", "nome2", "nome3", "nome4", 'nom5', 'nom6']
 
-  const limpar = () => {
-    setMusics(musics.map(i => i.playing = false))
+  Audio.requestPermissionsAsync();
+
+  async function playSound(position){
+    musica == null? null: musica.unloadAsync();
+    console.log("Playing audio")
+    const {sound} = await Audio.Sound.createAsync(musics[position].file)
+    setMusica(sound);
+    await sound.playAsync();
   }
 
-  const playMusic = choice => {setMusica(musics.map((i, index) => 
+  const playMusic = choice => {
+    setMusica(musics.map((i, index) => 
     index == choice? i.playing = true : i.playing = false
-    ))}
+    )); playSound(choice)}
 
   return (
     <View style={styles.container}>
