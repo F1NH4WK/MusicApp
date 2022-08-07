@@ -47,18 +47,11 @@ export default function App() {
     await sound.playAsync();
   }
 
-  async function nowPlay(){
-    await musica.playAsync();
-    setMusica(musica)
-    
+  async function playOrPause(val){
+    if (musica != null){
+      val? await musica.playAsync() : await musica.pauseAsync()
+    }
   }
-
-  async function stopSound(){
-    await musica != null? musica.stopAsync() : null
-    setMusica(musica)
-    
-  }
-
 
   const playMusic = choice => {
     setMusica(musics.map((i, index) => 
@@ -139,7 +132,7 @@ export default function App() {
         {musics.map((val) => val.playing?
         <DisplayMusic style = {styles.displayMusicGrouper} 
         musica = {val.musicName} singer = {val.singer}
-        pausar = {() => stopSound()} tocar = {() => nowPlay()} />
+        tocar = {(i) => playOrPause(i)} />
         :
         null)}
       
