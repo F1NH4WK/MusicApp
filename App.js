@@ -40,15 +40,25 @@ export default function App() {
 
   const test = ["limitless", "nome2", "nome3", "nome4", 'nom5', 'nom6']
 
-  Audio.requestPermissionsAsync();
-
   async function playSound(position){
-    musica == null? null: musica.unloadAsync();
-    console.log("Playing audio")
+    musica != null? musica.unloadAsync() : null;
     const {sound} = await Audio.Sound.createAsync(musics[position].file)
     setMusica(sound);
     await sound.playAsync();
   }
+
+  async function nowPlay(){
+    await musica.playAsync();
+    setMusica(musica)
+    
+  }
+
+  async function stopSound(){
+    await musica != null? musica.stopAsync() : null
+    setMusica(musica)
+    
+  }
+
 
   const playMusic = choice => {
     setMusica(musics.map((i, index) => 
@@ -101,8 +111,8 @@ export default function App() {
         <View style = {styles.recentMusicsView}>
           <FlatList 
           data={test}
-          renderItem={(item) => <MusicView nome = {item.item} 
-          style = {styles.recentMusicsStyle}/>}
+          renderItem={(item) =>
+            <MusicView nome = {item.item} style = {styles.recentMusicsStyle}/>}
           horizontal = {true}
           showsHorizontalScrollIndicator = {false}/>
         </View>
@@ -110,7 +120,6 @@ export default function App() {
 
         {/* HERE'S THE NAVBAR, PRETTY SIMPLE, BUT I LOVED IT :) */}
         
-
         <View style = {styles.navBar}>
           <View style = {styles.navBarIcon}>
             <Ionicons name="home-outline" size={27} color="white" style = {{alignSelf: 'center', marginBottom: 3}}/>
@@ -127,10 +136,10 @@ export default function App() {
             <Text style = {{color: 'white', fontSize: 12}}>My library</Text>
           </View>
         </View>      
-        {musics.map(val => 
-        val.playing?
+        {musics.map((val) => val.playing?
         <DisplayMusic style = {styles.displayMusicGrouper} 
-        musica = {val.musicName} singer = {val.singer}/>
+        musica = {val.musicName} singer = {val.singer}
+        pausar = {() => stopSound()} tocar = {() => nowPlay()} />
         :
         null)}
       

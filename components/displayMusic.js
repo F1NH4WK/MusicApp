@@ -1,8 +1,11 @@
 import { View, Text, Image, Pressable } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { useState } from "react";
 
 export default function DisplayMusic(props){
+
+    const [playing, setPlaying] = useState(true)
 
     return(
         <View style = {props.style}>
@@ -20,10 +23,15 @@ export default function DisplayMusic(props){
             width: '40%'}}>
                 <MaterialCommunityIcons name="devices" size={24} color="white" />
                 <Ionicons name="md-heart-outline" size={24} color="white" />
-                {
-                <Pressable onPress={async () => await props.stopPlaying()}>
+                {playing?
+                <Pressable onPress={() => {props.pausar(); setPlaying(false)}}>
                     <Ionicons name="pause" size={24} color="black" />
                 </Pressable>
+                :
+                <Pressable onPress={() => {props.tocar(); setPlaying(true)}}>
+                    <Ionicons name="play" size={24} color="black" />
+                </Pressable>
+                
                 }
             </View>
         </View>
