@@ -21,9 +21,8 @@ An app that plays some musics, like Spotify.<br />
 ## What's the prupose of this project?
 I made this simple app by aiming to improve my mobile app development skills with React Native.
 
-## Screenshots and GIFs
-
-## How it works?
+## App running
+<img src = "https://media0.giphy.com/media/KxlttFcjq3t2j6oaMf/giphy.gif?cid=6c09b952db48ff978f626aeb20543bffec36a2ea36d721c9&rid=giphy.gif&ct=g"/>
 
 [issues-shield]: https://img.shields.io/github/issues/F1NH4WK/MusicApp.svg?style=for-the-badge
 [issues-url]: https://github.com/F1NH4WK/MusicApp/issues
